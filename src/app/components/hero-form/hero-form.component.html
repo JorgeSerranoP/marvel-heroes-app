@@ -1,0 +1,67 @@
+
+<h1 mat-dialog-title> {{data.text}} </h1>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="nameLabel" required />
+      @if (form.controls['nameLabel'].hasError('required')) {
+        <mat-error>Name is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="genderLabel" required>
+        <mat-option value="">-</mat-option>
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+      </mat-select>
+      @if (form.controls['genderLabel'].hasError('required')) {
+      <mat-error>Gender is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Citizenship</mat-label>
+      <input matInput formControlName="citizenshipLabel" required />
+      @if (form.controls['citizenshipLabel'].hasError('required')) {
+        <mat-error>Citizenship is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Skills</mat-label>
+      <input matInput formControlName="skillsLabel" required />
+      @if (form.controls['skillsLabel'].hasError('required')) {
+        <mat-error>Skills is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Occupation</mat-label>
+      <input matInput formControlName="occupationLabel" required />
+      @if (form.controls['occupationLabel'].hasError('required')) {
+        <mat-error>Occupation is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Member of</mat-label>
+      <input matInput formControlName="memberOfLabel" required />
+      @if (form.controls['memberOfLabel'].hasError('required')) {
+        <mat-error>Member of is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Creator</mat-label>
+      <input matInput formControlName="creatorLabel" required />
+      @if (form.controls['creatorLabel'].hasError('required')) {
+        <mat-error>Creator is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{data.text}}</button>
+  </form>
+</mat-dialog-content>

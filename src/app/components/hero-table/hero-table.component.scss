@@ -1,0 +1,45 @@
+.hero-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .form {
+    flex: 0.7;
+  }
+}
+
+.hero-table {
+  overflow-y: auto;
+
+  table {
+    background-color: white;
+
+    .chart-header {
+      padding: 30px;
+      border: 0px;
+    }
+
+    .column-name-header {
+      border-top: 1px solid var(--mat-table-row-item-outline-color, var(--mat-sys-outline, rgba(0, 0, 0, 0.12)));
+      background-color: var(--mdc-fab-container-color, var(--mat-sys-primary-container));
+      font-weight: bold;
+      color: var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));
+    }
+
+    td:nth-of-type(odd) {
+      background-color: var(--mdc-filled-text-field-container-color, var(--mat-sys-surface-variant));
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .detail {
+    cursor: pointer;
+  }
+}
+
+
