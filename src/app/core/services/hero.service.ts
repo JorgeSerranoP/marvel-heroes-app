@@ -7,9 +7,10 @@ import { Hero } from '../models/hero';
   providedIn: 'root'
 })
 export class HeroService {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   heroes = signal<Hero[]>([]);
+  activeHeroFilters = signal<string[]>([]);
   isLoading = signal<boolean>(true);
 
   constructor() {
@@ -57,6 +58,12 @@ export class HeroService {
     }
   }
 
+  /**
+   * Generates a unique temporary ID for a hero.
+   * Combines the hero's name and the current timestamp to ensure uniqueness.
+   * @param name Hero's name.
+   * @returns A unique temporary ID.
+   */
   private generateTempId(name: string): string {
     return `${name}-${Date.now()}`;
   }
@@ -65,7 +72,6 @@ export class HeroService {
     hero.tempId = this.generateTempId(hero.nameLabel);
     this.heroes.update(currentHeroes => [hero, ...currentHeroes]);
     this.saveToIndexedDB();
-
   }
 
   updateHero(updatedHero: Hero): void {
@@ -80,6 +86,9 @@ export class HeroService {
   removeHero(heroToRemove: Hero): void {
     this.heroes.update(currentHeroes =>
       currentHeroes.filter(hero => hero.tempId !== heroToRemove.tempId)
+    );
+    this.activeHeroFilters.update(filters =>
+      filters.filter(filter => filter !== heroToRemove.nameLabel)
     );
     this.saveToIndexedDB();
   }

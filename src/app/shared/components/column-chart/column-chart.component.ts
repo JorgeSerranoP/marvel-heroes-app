@@ -23,7 +23,7 @@ export class ColumnChartComponent implements OnInit {
   private generateChart(): void {
     const valueCounts = this.countValues(this.columnData);
 
-    this.chartType = Object.keys(valueCounts).length <= 5 ? 'pie' : 'bar';
+    this.chartType = this.getChartType(valueCounts)
 
     this.chartData = {
       labels: Object.keys(valueCounts),
@@ -38,6 +38,10 @@ export class ColumnChartComponent implements OnInit {
         }
       ]
     };
+  }
+
+  private getChartType(valueCounts: Record<string, number>): ChartType {
+    return Object.keys(valueCounts).length <= 5 ? 'pie' : 'bar';
   }
 
   private countValues(data: string[]): Record<string, number> {

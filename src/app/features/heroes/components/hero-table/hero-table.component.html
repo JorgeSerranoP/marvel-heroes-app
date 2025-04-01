@@ -1,0 +1,92 @@
+<div class="hero-table">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    @for (column of chartColumnKeys; track column) {
+    <ng-container [matColumnDef]="column + '-chart'">
+      <th mat-header-cell *matHeaderCellDef class="chart-header">
+        @if (!heroService.isLoading()) {
+        <app-column-chart [columnName]="column" [columnData]="getChartColumnData (column)">
+        </app-column-chart>
+        } @else {
+        <div class="spinner" *ngIf="heroService.isLoading()">
+          <mat-spinner></mat-spinner>
+        </div>
+        }
+      </th>
+    </ng-container>
+    }
+
+    <ng-container matColumnDef="nameLabel">
+      <th class="column-name-header" mat-header-cell *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by nameLabel">
+        Name
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.nameLabel}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="genderLabel">
+      <th class="column-name-header" mat-header-cell *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by genderLabel">
+        Gender
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.genderLabel}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="citizenshipLabel">
+      <th class="column-name-header" mat-header-cell *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by citizenshipLabel">
+        Citizenship
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.citizenshipLabel}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="skillsLabel">
+      <th class="column-name-header" mat-header-cell *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by skillsLabel">
+        Skills
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.skillsLabel}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="occupationLabel">
+      <th class="column-name-header" mat-header-cell *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by occupationLabel">
+        Occupation
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.occupationLabel}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="memberOfLabel">
+      <th class="column-name-header" mat-header-cell *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by memberOfLabel">
+        Member of
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.memberOfLabel}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="creatorLabel">
+      <th class="column-name-header" mat-header-cell *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by creatorLabel">
+        Creator
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.creatorLabel}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actionsLabel">
+      <th class="column-name-header" mat-header-cell *matHeaderCellDef>
+        Actions
+      </th>
+      <td mat-cell *matCellDef="let element" class="actions">
+        <button mat-mini-fab color="primary" (click)="onEdit($event, element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" (click)="onDelete($event, element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="headerColumnsWithCharts"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="detail" (click)="onDetails(row)"></tr>
+  </table>
+</div>

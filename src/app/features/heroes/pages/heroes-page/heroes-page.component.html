@@ -1,0 +1,14 @@
+<section class="container">
+  <div class="hero-controls">
+    <app-hero-filter></app-hero-filter>
+
+    <button mat-fab extended color="primary" (click)="addHero()">
+      <mat-icon>add</mat-icon>Create hero
+    </button>
+  </div>
+  <app-hero-table
+    (edit)="editHero($event)"
+    (delete)="deleteHero($event)"
+    (details)="openDetails($event)">
+  </app-hero-table>
+</section>

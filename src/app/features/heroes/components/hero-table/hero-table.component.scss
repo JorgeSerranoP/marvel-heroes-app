@@ -1,13 +1,3 @@
-.hero-controls {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  .form {
-    flex: 0.7;
-  }
-}
-
 .hero-table {
   overflow-y: auto;
 
@@ -39,6 +29,11 @@
 
   .detail {
     cursor: pointer;
+  }
+
+  .spinner {
+    display: flex;
+    justify-content: center;
   }
 }
 

@@ -10,5 +10,5 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
   styleUrls: ['./hero-modal.component.scss']
 })
 export class HeroModalComponent {
-  data = inject(MAT_DIALOG_DATA);
+  readonly data = inject(MAT_DIALOG_DATA);
 }

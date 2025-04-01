@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HeroService } from '../../services/hero.service';
-import { Hero } from '../../models/hero';
+import { HeroService } from '../../../../core/services/hero.service';
+import { Hero } from '../../../../core/models/hero';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,8 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrls: ['./hero-form.component.scss']
 })
 export class HeroFormComponent {
-  heroService = inject(HeroService);
-  data = inject(MAT_DIALOG_DATA);
+  readonly heroService = inject(HeroService);
+  readonly data = inject(MAT_DIALOG_DATA);
   form: FormGroup;
 
   constructor(

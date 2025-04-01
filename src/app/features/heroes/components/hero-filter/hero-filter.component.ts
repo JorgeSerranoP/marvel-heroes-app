@@ -1,13 +1,11 @@
-import { Component, EventEmitter, Output, computed, inject, model, signal } from '@angular/core';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { HeroService } from '../../services/hero.service';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, EventEmitter, Output, computed, inject, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { HeroService } from '../../../../core/services/hero.service';
 
 @Component({
   selector: 'app-hero-filter',
@@ -24,9 +22,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class HeroFilterComponent {
   readonly heroService = inject(HeroService);
+
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   readonly chipInputValue = model('');
-  readonly activeHeroFilters = signal<string[]>([]);
   readonly availableHeroNames = computed(() => this.heroService.heroes().map(hero => hero.nameLabel));
   readonly matchingHeroNames = computed(() => {
     const chipInputValue = this.chipInputValue().toLowerCase();
@@ -40,15 +38,14 @@ export class HeroFilterComponent {
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     if (value) {
-      this.activeHeroFilters.update(heroes => [...heroes, value]);
-      this.emitFilters();
+      this.heroService.activeHeroFilters.update(heroes => [...heroes, value]);
     }
 
     this.chipInputValue.set('');
   }
 
   remove(hero: string): void {
-    this.activeHeroFilters.update(heroes => {
+    this.heroService.activeHeroFilters.update(heroes => {
       const index = heroes.indexOf(hero);
       if (index < 0) {
         return heroes;
@@ -57,17 +54,11 @@ export class HeroFilterComponent {
       heroes.splice(index, 1);
       return [...heroes];
     });
-    this.emitFilters();
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.activeHeroFilters.update(heroes => [...heroes, event.option.viewValue]);
+    this.heroService.activeHeroFilters.update(heroes => [...heroes, event.option.viewValue]);
     this.chipInputValue.set('');
     event.option.deselect();
-    this.emitFilters();
-  }
-
-  private emitFilters(): void {
-    this.filtersChanged.emit(this.activeHeroFilters());
   }
 }

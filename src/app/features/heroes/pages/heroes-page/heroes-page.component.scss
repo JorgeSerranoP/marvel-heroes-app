@@ -1,0 +1,13 @@
+.container {
+  padding: 24px;
+
+  .hero-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+  .form {
+    flex: 0.7;
+  }
+}
+}
