@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-hero-filter',
+  standalone: true,
   imports: [
     FormsModule,
     MatAutocompleteModule,
@@ -19,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
   ],
   templateUrl: './hero-filter.component.html',
-  styleUrl: './hero-filter.component.scss'
+  styleUrls: ['./hero-filter.component.scss']
 })
 export class HeroFilterComponent {
   readonly heroService = inject(HeroService);

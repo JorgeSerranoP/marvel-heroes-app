@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-hero-form',
+  standalone: true,
   imports: [MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatSelectModule, MatButtonModule, MatDialogModule, MatOption],
   templateUrl: './hero-form.component.html',
   styleUrls: ['./hero-form.component.scss']

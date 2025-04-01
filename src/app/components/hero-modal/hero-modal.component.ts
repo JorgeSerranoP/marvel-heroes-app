@@ -4,9 +4,10 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-hero-modal',
+  standalone: true,
   imports: [MatDialogModule, TitleCasePipe],
   templateUrl: './hero-modal.component.html',
-  styleUrl: './hero-modal.component.scss'
+  styleUrls: ['./hero-modal.component.scss']
 })
 export class HeroModalComponent {
   data = inject(MAT_DIALOG_DATA);

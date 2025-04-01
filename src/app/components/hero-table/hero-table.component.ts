@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, signal, ViewChild } from '@angular/core';
+import { Component, effect, inject, signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,11 +9,10 @@ import { Hero } from '../../models/hero';
 import { HeroService } from '../../services/hero.service';
 import { ColumnChartComponent } from "../column-chart/column-chart.component";
 import { HeroFilterComponent } from "../hero-filter/hero-filter.component";
-import { HeroFormComponent } from '../hero-form/hero-form.component';
-import { HeroModalComponent } from '../hero-modal/hero-modal.component';
 
 @Component({
   selector: 'app-hero-table',
+  standalone: true,
   imports: [
     CommonModule,
     MatTableModule,
@@ -24,7 +23,7 @@ import { HeroModalComponent } from '../hero-modal/hero-modal.component';
     HeroFilterComponent
 ],
   templateUrl: './hero-table.component.html',
-  styleUrl: './hero-table.component.scss'
+  styleUrls: ['./hero-table.component.scss']
 })
 export class HeroTableComponent {
   readonly activeHeroFilters = signal<string[]>([]);
@@ -63,31 +62,35 @@ export class HeroTableComponent {
   }
 
   openDetails(hero: Hero) {
-    this.dialog.open(HeroModalComponent
-      , {
+    import('../hero-modal/hero-modal.component').then(({ HeroModalComponent }) => {
+      this.dialog.open(HeroModalComponent, {
         width: '400px',
         data: hero
-      }
-    );
+      });
+    });
   }
 
   addHero() {
-    this.dialog.open(HeroFormComponent, {
-      width: '400px',
-      data: {
-        text: 'Create Hero'
-      }
+    import('../hero-form/hero-form.component').then(({ HeroFormComponent }) => {
+      this.dialog.open(HeroFormComponent, {
+        width: '400px',
+        data: {
+          text: 'Create Hero'
+        }
+      });
     });
   }
 
   editHero(event: Event, hero: Hero): void {
     event.stopPropagation();
-    this.dialog.open(HeroFormComponent, {
-      width: '400px',
-      data: {
-        ...hero,
-        text: 'Edit Hero'
-      }
+    import('../hero-form/hero-form.component').then(({ HeroFormComponent }) => {
+      this.dialog.open(HeroFormComponent, {
+        width: '400px',
+        data: {
+          ...hero,
+          text: 'Edit Hero'
+        }
+      });
     });
   }
 

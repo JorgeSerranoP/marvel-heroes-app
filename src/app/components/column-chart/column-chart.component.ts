@@ -4,6 +4,7 @@ import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-column-chart',
+  standalone: true,
   imports: [BaseChartDirective],
   templateUrl: './column-chart.component.html',
   styleUrls: ['./column-chart.component.scss']
