@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { HeroService } from './hero.service';
-import { Hero } from '../models/hero';
 import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { Hero } from '../models/hero';
+import { HeroService } from './hero.service';
 
 describe('HeroService', () => {
   let service: HeroService;
