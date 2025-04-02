@@ -12,13 +12,21 @@ import { HeroService } from '../../../../core/services/hero.service';
 @Component({
   selector: 'app-hero-form',
   standalone: true,
-  imports: [MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatSelectModule, MatButtonModule, MatDialogModule, MatOption],
+  imports: [
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatOption
+  ],
   templateUrl: './hero-form.component.html',
   styleUrls: ['./hero-form.component.scss']
 })
 export class HeroFormComponent {
   readonly heroService = inject(HeroService);
-  readonly data = inject(MAT_DIALOG_DATA);
+  readonly hero: Hero = inject(MAT_DIALOG_DATA);
   form: FormGroup;
 
   constructor(
@@ -26,26 +34,26 @@ export class HeroFormComponent {
     private dialogRef: MatDialogRef<HeroFormComponent>
   ) {
     this.form = this.fb.group({
-      nameLabel: [this.data.nameLabel ?? '', Validators.required],
-      genderLabel: [this.data.genderLabel ?? '', Validators.required],
-      citizenshipLabel: [this.data.citizenshipLabel ?? '', Validators.required],
-      skillsLabel: [this.data.skillsLabel ?? '', Validators.required],
-      occupationLabel: [this.data.occupationLabel ?? '', Validators.required],
-      memberOfLabel: [this.data.memberOfLabel ?? '', Validators.required],
-      creatorLabel: [this.data.creatorLabel ?? '', Validators.required]
+      nameLabel: [this.hero?.nameLabel ?? '', Validators.required],
+      genderLabel: [this.hero?.genderLabel ?? '', Validators.required],
+      citizenshipLabel: [this.hero?.citizenshipLabel ?? '', Validators.required],
+      skillsLabel: [this.hero?.skillsLabel ?? '', Validators.required],
+      occupationLabel: [this.hero?.occupationLabel ?? '', Validators.required],
+      memberOfLabel: [this.hero?.memberOfLabel ?? '', Validators.required],
+      creatorLabel: [this.hero?.creatorLabel ?? '', Validators.required]
     });
   }
 
   onSubmit(): void {
     if (this.form.valid) {
-      const hero: Hero = {
+      const formHero: Hero = {
         ...this.form.value,
-        tempId: this.data.tempId
+        tempId: this.hero.tempId
       };
-      if(this.data.tempId) {
-        this.heroService.updateHero(hero);
+      if(this.hero) {
+        this.heroService.updateHero(formHero);
       } else{
-        this.heroService.addHero(hero);
+        this.heroService.addHero(formHero);
       }
       this.form.reset();
       this.dialogRef.close();

@@ -37,8 +37,7 @@ export class HeroesPageComponent {
   addHero(): void {
     import('../../components/hero-form/hero-form.component').then(({ HeroFormComponent }) => {
       this.dialog.open(HeroFormComponent, {
-        width: '400px',
-        data: { text: 'Create Hero' }
+        width: '400px'
       });
     });
   }
@@ -47,7 +46,7 @@ export class HeroesPageComponent {
     import('../../components/hero-form/hero-form.component').then(({ HeroFormComponent }) => {
       this.dialog.open(HeroFormComponent, {
         width: '400px',
-        data: { ...hero, text: 'Edit Hero' }
+        data: hero
       });
     });
   }

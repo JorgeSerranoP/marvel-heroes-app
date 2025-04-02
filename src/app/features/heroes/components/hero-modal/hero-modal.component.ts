@@ -1,6 +1,7 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { Hero } from '../../../../core/models/hero';
 
 @Component({
   selector: 'app-hero-modal',
@@ -10,5 +11,5 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
   styleUrls: ['./hero-modal.component.scss']
 })
 export class HeroModalComponent {
-  readonly data = inject(MAT_DIALOG_DATA);
+  readonly hero: Hero = inject(MAT_DIALOG_DATA);
 }

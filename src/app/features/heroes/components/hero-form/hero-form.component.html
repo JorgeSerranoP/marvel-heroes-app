@@ -1,5 +1,9 @@
 
-<h1 mat-dialog-title> {{data.text}} </h1>
+@if (!hero) {
+  <h1 mat-dialog-title>Create Hero</h1>
+} @else {
+  <h1 mat-dialog-title>Edit Hero</h1>
+}
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
     <mat-form-field>
@@ -62,6 +66,10 @@
       }
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{data.text}}</button>
+    @if (!hero) {
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Create Hero</button>
+    } @else {
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Create Hero</button>
+    }
   </form>
 </mat-dialog-content>
