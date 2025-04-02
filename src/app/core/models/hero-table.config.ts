@@ -8,4 +8,12 @@ export const HERO_COLUMNS = [
   'creatorLabel'
 ];
 
-export const CHART_COLUMNS = ['name', 'gender', 'citizenship', 'skills', 'occupation', 'memberOf', 'creator'];
+export const CHART_COLUMNS = [
+  'name',
+  'gender',
+  'citizenship',
+  'skills',
+  'occupation',
+  'memberOf',
+  'creator'
+];
