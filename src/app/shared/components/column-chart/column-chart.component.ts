@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
@@ -10,8 +10,8 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./column-chart.component.scss']
 })
 export class ColumnChartComponent implements OnInit {
-  @Input() columnName!: string;
-  @Input() columnData!: string[];
+  readonly columnName = input.required<string>();
+  readonly columnData = input.required<string[]>();
 
   chartType: ChartType = 'bar';
   chartData: any = {};
@@ -21,7 +21,7 @@ export class ColumnChartComponent implements OnInit {
   }
 
   private generateChart(): void {
-    const valueCounts = this.countValues(this.columnData);
+    const valueCounts = this.countValues(this.columnData());
 
     this.chartType = this.getChartType(valueCounts)
 
@@ -29,7 +29,7 @@ export class ColumnChartComponent implements OnInit {
       labels: Object.keys(valueCounts),
       datasets: [
         {
-          label: this.columnName,
+          label: this.columnName(),
           data: Object.values(valueCounts),
           backgroundColor: [
             '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'

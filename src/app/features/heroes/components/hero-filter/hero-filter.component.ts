@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, EventEmitter, Output, computed, inject, model } from '@angular/core';
+import { Component, computed, inject, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
@@ -33,7 +33,7 @@ export class HeroFilterComponent {
       : this.availableHeroNames().slice();
   });
 
-  @Output() filtersChanged = new EventEmitter<string[]>();
+  readonly filtersChanged = output<string[]>();
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();

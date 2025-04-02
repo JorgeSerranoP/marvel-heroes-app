@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, EventEmitter, inject, Output, ViewChild } from '@angular/core';
+import { Component, computed, effect, inject, output, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Hero } from '../../../../core/models/hero';
+import { CHART_COLUMNS, HERO_COLUMNS } from '../../../../core/models/hero-table.config';
 import { HeroService } from '../../../../core/services/hero.service';
 import { ColumnChartComponent } from "../../../../shared/components/column-chart/column-chart.component";
-import { HERO_COLUMNS, CHART_COLUMNS } from '../../../../core/models/hero-table.config';
 
 @Component({
   selector: 'app-hero-table',
@@ -28,9 +28,9 @@ import { HERO_COLUMNS, CHART_COLUMNS } from '../../../../core/models/hero-table.
 export class HeroTableComponent {
   readonly heroService = inject(HeroService);
 
-  @Output() edit = new EventEmitter<Hero>();
-  @Output() delete = new EventEmitter<Hero>();
-  @Output() details = new EventEmitter<Hero>();
+  readonly edit = output<Hero>();
+  readonly delete = output<Hero>();
+  readonly details = output<Hero>();
 
   dataSource = new MatTableDataSource<Hero>();
   displayedColumns: string[] = [...HERO_COLUMNS, 'actionsLabel'];
