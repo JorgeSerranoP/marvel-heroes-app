@@ -1,59 +1,71 @@
-# MarvelHeroesApp
+# Marvel Wikipedia Challenge
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+## Description
 
-## Development server
+This project is an Angular application that displays a table with information about Marvel superheroes, using data provided in a JSON file. The interface is built with Angular Material.
 
-To start a local development server, run:
+## Implemented Features
 
-```bash
-ng serve
-```
+- **Data visualization** in a table with sorting options.
+- **Name filtering** using the Angular Material chips component.
+- **Detail view** in a modal when clicking on a row.
+- **Additional functionalities** such as creating, editing, and deleting heroes.
+- **Graphs** to represent data metrics.
+- **Unit tests with Jasmine.**
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Installation and Usage
 
-## Code scaffolding
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   ng serve
+   ```
+   Then, access `http://localhost:4200/` in your browser.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Project Structure
 
 ```bash
-ng build
+src/
+├── app/
+│   ├── core/
+│   │   ├── models/         # Data models and interfaces
+│   │   ├── services/       # Services for data handling
+│   ├── features/
+│   │   ├── heroes/
+│   │   │   ├── components/  # Hero-related components
+│   │   │   ├── pages/       # Hero-related pages
+│   ├── shared/
+│   │   ├── components/      # Reusabel components
+│   ├── app.component.html
+│   ├── app.component.scss
+│   ├── app.component.ts
+│   ├── app.config.ts
+│   ├── app.routes.ts
+├── assets/
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Testing
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Unit tests can be executed with:
 
 ```bash
-ng test
+npm run test
 ```
 
-## Running end-to-end tests
+## Technical Decisions
 
-For end-to-end (e2e) testing, run:
+- **Angular Material** was used to facilitate design and accessibility.
+- Data management is handled through an **Angular service**.
+- The table uses `MatTableDataSource` for functionalities such as filtering and sorting.
+- **Data persistence** using `indexedDB`.
+- **Graph implementation** with `Chart.js`.
 
-```bash
-ng e2e
-```
+## Possible Improvements
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Integration with a real API instead of a JSON file.
+- Implementation of table pagination.
+- Implementation of more unit and integration tests.
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
