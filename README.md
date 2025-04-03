@@ -38,7 +38,7 @@ src/
 │   │   │   ├── components/  # Hero-related components
 │   │   │   ├── pages/       # Hero-related pages
 │   ├── shared/
-│   │   ├── components/      # Reusabel components
+│   │   ├── components/      # Reusable components
 │   ├── app.component.html
 │   ├── app.component.scss
 │   ├── app.component.ts
