@@ -47,12 +47,11 @@ export class HeroFormComponent {
   onSubmit(): void {
     if (this.form.valid) {
       const formHero: Hero = {
-        ...this.form.value,
-        tempId: this.hero.tempId
+        ...this.form.value
       };
-      if(this.hero) {
+      if (this.hero) {
         this.heroService.updateHero(formHero);
-      } else{
+      } else {
         this.heroService.addHero(formHero);
       }
       this.form.reset();
