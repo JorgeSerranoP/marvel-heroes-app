@@ -21,7 +21,7 @@ import { ColumnChartComponent } from "../../../../shared/components/column-chart
     MatButtonModule,
     MatProgressSpinnerModule,
     ColumnChartComponent
-],
+  ],
   templateUrl: './hero-table.component.html',
   styleUrls: ['./hero-table.component.scss']
 })
@@ -72,7 +72,20 @@ export class HeroTableComponent {
 
   /**
    * Memoizes column data for charts.
-   * Recalculates only when the table's data changes (`dataSource.data`).
+   * This means the data is computed once and cached, and it will only be recalculated
+   * when the table's data (`dataSource.data`) changes.
+   *
+   * For each column in HERO_COLUMNS, it removes the 'Label' suffix to create a chart column key
+   * and maps the corresponding data from the table rows.
+   *
+   * Example:
+   * If HERO_COLUMNS = ['nameLabel', 'genderLabel'], and dataSource.data contains:
+   * [{ nameLabel: 'Hero1', genderLabel: 'Male' }, { nameLabel: 'Hero2', genderLabel: 'Female' }],
+   * The result will be:
+   * {
+   *   name: ['Hero1', 'Hero2'],
+   *   gender: ['Male', 'Female']
+   * }
    */
   columnData = computed(() => {
     const data: { [key: string]: string[] } = {};
