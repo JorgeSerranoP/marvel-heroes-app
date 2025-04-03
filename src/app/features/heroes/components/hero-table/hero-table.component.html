@@ -3,7 +3,7 @@
     @for (column of headerColumnsWithCharts; track column) {
       <ng-container [matColumnDef]="column">
         <th mat-header-cell *matHeaderCellDef class="chart-header">
-          @if (!heroService.isLoading()) {
+          @if (isDataReady()) {
             <app-column-chart
               [columnName]="column.replace('-chart', '')"
               [columnData]="getChartColumnData(column.replace('-chart', ''))">

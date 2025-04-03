@@ -11,7 +11,6 @@ export class HeroService {
 
   heroes = signal<Hero[]>([]);
   activeHeroFilters = signal<string[]>([]);
-  isLoading = signal<boolean>(true);
 
   constructor() {
     this.loadHeroes();
@@ -28,8 +27,6 @@ export class HeroService {
     } catch (error) {
       console.error('Error loading heroes from IndexedDB:', error);
       this.fetchHeroesFromApi();
-    } finally {
-      this.isLoading.set(false);
     }
   }
 

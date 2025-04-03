@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, output, ViewChild } from '@angular/core';
+import { Component, computed, effect, inject, output, signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -27,6 +27,7 @@ import { ColumnChartComponent } from "../../../../shared/components/column-chart
 })
 export class HeroTableComponent {
   readonly heroService = inject(HeroService);
+  readonly isDataReady = signal(false)
 
   readonly edit = output<Hero>();
   readonly delete = output<Hero>();
@@ -49,6 +50,7 @@ export class HeroTableComponent {
     effect(() => {
       this.dataSource.data = this.heroService.heroes();
       this.dataSource.filter = this.heroService.activeHeroFilters().join(',');
+      this.isDataReady.set(this.dataSource.data.length > 0);
     });
   }
 
