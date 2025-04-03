@@ -7,13 +7,3 @@ export const HERO_COLUMNS = [
   'memberOfLabel',
   'creatorLabel'
 ];
-
-export const CHART_COLUMNS = [
-  'name',
-  'gender',
-  'citizenship',
-  'skills',
-  'occupation',
-  'memberOf',
-  'creator'
-];

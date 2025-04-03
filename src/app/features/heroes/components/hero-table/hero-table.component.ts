@@ -6,7 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Hero } from '../../../../core/models/hero';
-import { CHART_COLUMNS, HERO_COLUMNS } from '../../../../core/models/hero-table.config';
+import { HERO_COLUMNS } from '../../../../core/models/hero-table.config';
 import { HeroService } from '../../../../core/services/hero.service';
 import { ColumnChartComponent } from "../../../../shared/components/column-chart/column-chart.component";
 
@@ -34,8 +34,7 @@ export class HeroTableComponent {
 
   dataSource = new MatTableDataSource<Hero>();
   displayedColumns: string[] = [...HERO_COLUMNS, 'actionsLabel'];
-  chartColumnKeys: string[] = CHART_COLUMNS;
-  headerColumnsWithCharts: string[] = CHART_COLUMNS.map(column => column + '-chart');
+  headerColumnsWithCharts: string[] = HERO_COLUMNS.map(column => column.replace('Label', '-chart'));
 
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
@@ -77,8 +76,9 @@ export class HeroTableComponent {
    */
   columnData = computed(() => {
     const data: { [key: string]: string[] } = {};
-    this.chartColumnKeys.forEach(column => {
-      data[column] = this.dataSource.data.map((row: Hero) => row[column + 'Label' as keyof Hero] || '');
+    HERO_COLUMNS.forEach(column => {
+      const chartColumn = column.replace('Label', '');
+      data[chartColumn] = this.dataSource.data.map((row: Hero) => row[column as keyof Hero] || '');
     });
     return data;
   });

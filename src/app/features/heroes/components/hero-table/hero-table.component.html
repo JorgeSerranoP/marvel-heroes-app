@@ -1,18 +1,20 @@
 <div class="hero-table">
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-    @for (column of chartColumnKeys; track column) {
-    <ng-container [matColumnDef]="column + '-chart'">
-      <th mat-header-cell *matHeaderCellDef class="chart-header">
-        @if (!heroService.isLoading()) {
-        <app-column-chart [columnName]="column" [columnData]="getChartColumnData (column)">
-        </app-column-chart>
-        } @else {
-        <div class="spinner" *ngIf="heroService.isLoading()">
-          <mat-spinner></mat-spinner>
-        </div>
-        }
-      </th>
-    </ng-container>
+    @for (column of headerColumnsWithCharts; track column) {
+      <ng-container [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef class="chart-header">
+          @if (!heroService.isLoading()) {
+            <app-column-chart
+              [columnName]="column.replace('-chart', '')"
+              [columnData]="getChartColumnData(column.replace('-chart', ''))">
+            </app-column-chart>
+          } @else {
+            <div class="spinner">
+              <mat-spinner></mat-spinner>
+            </div>
+          }
+        </th>
+      </ng-container>
     }
 
     <ng-container matColumnDef="nameLabel">
